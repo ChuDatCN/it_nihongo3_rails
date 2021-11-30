@@ -1,11 +1,17 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+
 
   # GET /books or /books.json
   def index
     @books = Book.all
   end
-
+  
+    def book_params
+    params.require(:book).permit(title, :number_of_pages, :image)
+    end
+    
   # GET /books/1 or /books/1.json
   def show
   end
