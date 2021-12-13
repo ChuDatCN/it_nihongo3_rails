@@ -16,10 +16,10 @@
 </p>
 
 <p>
-  <% if @book.image.attached? %>
-    <%= image_tag @book.image %>
-  <% end %>
-</p>
+   <% if @book.image.attached? %>
+     <%= image_tag @book.image %>
+   <% end %>
+ </p>
 
 <p>Review From</p>
  <%= form_with(model: @book_review, local: true) do |form| %>
@@ -31,6 +31,14 @@
      <%= form.submit %>
    </div>
  <% end %>
+
+<p>Review List</p>
+  <ul>
+    <% @book.book_review.each do |book_review|%>
+      <li><%= book_review.review %>
+      (<i><%= book_review.user.name %></i>)</li>
+    <% end %>
+  </ul>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
